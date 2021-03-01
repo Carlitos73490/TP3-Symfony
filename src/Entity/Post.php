@@ -48,7 +48,7 @@ class Post
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="posts")
      */
-    private $author;
+    private User $author;
 
     public function __construct()
     {
@@ -150,4 +150,10 @@ class Post
 
         return $this;
     }
+
+    public function __toString(): string
+    {
+        return $this->author . " " . $this->id;
+    }
+
 }
