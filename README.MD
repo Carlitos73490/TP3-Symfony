@@ -36,3 +36,12 @@ Pour que l'interface des CRUD controllers de Easy Admin sachent quoi afficher po
 `composer require twig`
 
 `symfony console make:controller`
+
+#### params converter
+
+The @ParamConverter annotation calls converters to convert request parameters to objects. These objects are stored as request attributes and so they can be injected as controller method arguments:
+
+The Doctrine Converter attempts to convert request attributes to Doctrine entities fetched from the database. Several different approaches are possible:
+
+
+A partir de l'id passé dans le chemin du route, le params converter s'occupe de recuperer l'objet doctrine 

@@ -24,6 +24,7 @@ class CommentCrudController extends AbstractCrudController
             AssociationField::new('author'),
             DateTimeField::new('CreatedAt'),
             BooleanField::new('isDeleted'),
+            AssociationField::new('Post'),
 
         ];
     }

@@ -45,6 +45,11 @@ class User
      */
     private $posts;
 
+    /**
+     * @ORM\Column(type="string", length=500, nullable=true)
+     */
+    private $BioContent;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -155,6 +160,18 @@ class User
     public function __toString(): string
     {
         return $this->getUsername();
+    }
+
+    public function getBioContent(): ?string
+    {
+        return $this->BioContent;
+    }
+
+    public function setBioContent(?string $BioContent): self
+    {
+        $this->BioContent = $BioContent;
+
+        return $this;
     }
 
 }

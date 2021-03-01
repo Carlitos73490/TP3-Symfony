@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ArticleController!{% endblock %}
+
+{% block body %}
+    {{ post.content}}
+    {% for comment in post.comments %}
+        {{ comment.author}}
+        {{ comment.content}}
+    {% endfor %}
+
+{% endblock %}
