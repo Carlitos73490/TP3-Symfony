@@ -29,3 +29,10 @@ Il est préférable d’utiliser Sonata si votre application comporte d'innombra
 Pour que l'interface des CRUD controllers de Easy Admin sachent quoi afficher pour identifier l'objet
 
 `AssociationField::new('author')`
+
+
+#### Controlleurs
+
+`composer require twig`
+
+`symfony console make:controller`
