@@ -5,6 +5,7 @@
 {% block body %}
     {% for post in posts %}
         <div>
+            <a href="profile/{{ post.author.id}}">{{ post.author.username }}</a>
             <a href="article/{{ post.id}}">{{ post.content }}</a>
         </div>
     {% endfor %}
