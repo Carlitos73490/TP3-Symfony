@@ -1,19 +1,31 @@
-###### Quelles sont les fonctionnalités principales du Symfony CLI ?
+### Quelles sont les fonctionnalités principales du Symfony CLI ?
 
 Création de projets 
 Configuation de symfony
-###### Quelles relations existent entre les entités (Many To One/Many To Many/...) ? Faire un schéma de la base de données.
+### Quelles relations existent entre les entités (Many To One/Many To Many/...) ? Faire un schéma de la base de données.
 ![schema](Schema.png "Schema de la base")
-###### Connexion à la base #
+# Connexion à la base #
 
 La configuration de la base de données ce fait dans le ficher .env
 Il faut decommenter sqllite car la configuration de base utilise une base postgressql
 
-###### Administration 
+# Administration 
 •	Sonata est un bundle très riche en fonctionnalités. Ces dernières ne sont néanmoins pas toutes documentées. De ce fait, l’outil reste assez complexe lorsque l’on débute.
 •	EasyAdmin est, quant à lui, un peu plus limité en features. Il est cependant très simple d’utilisation et possède une documentation très complète.
 
 Pour récapituler : EasyAdmin cible principalement les applications simples et de petite ou moyenne envergure (un site de news, un blog, des petits sites marchands, etc.).
 Il est préférable d’utiliser Sonata si votre application comporte d'innombrables règles de gestion et de sécurité (un domaine qu’EasyAdmin ne maîtrise pas encore).
 
-composer require easycorp/easyadmin-bundle
+### Installation/Configuration Easy Admin
+
+`composer require easycorp/easyadmin-bundle`
+
+`php bin/console make:admin:dashboard`
+
+`symfony console make:admin:crud`
+
+#### Pourquoi doit-on implémenter des méthodes to string dans nos entités? 
+
+Pour que l'interface des CRUD controllers de Easy Admin sachent quoi afficher pour identifier l'objet
+
+`AssociationField::new('author')`
