@@ -3,10 +3,19 @@
 {% block title %}Blog Carl{% endblock %}
 
 {% block body %}
-    {% for post in posts %}
-        <div>
-            <a href="profile/{{ post.author.id}}">{{ post.author.username }}</a>
-            <a href="article/{{ post.id}}">{{ post.content }}</a>
+    <div class="d-flex w-100">
+        <div class="w-75">
+        <p>New Articles</p>
+        {% for post in posts %}
+            <div class="d-flex">
+                <a href="profile/{{ post.author.id}}">{{ post.author.username }}</a>
+                <a href="article/{{ post.id}}">{{ post.content }}</a>
+            </div>
+        {% endfor %}
         </div>
-    {% endfor %}
+        <div class="w-25">
+            <p>unUser</p>
+            <p>Top Articles</p>
+        </div>
+    </div>
 {% endblock %}

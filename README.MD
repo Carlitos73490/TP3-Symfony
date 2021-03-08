@@ -73,3 +73,61 @@ Pas besoin de créer le formulaire en html, symfony s'en charge ainsi que le map
 `composer require symfony/webpack-encore-bundle`
 
 `npm install -g yarn`
+
+### Quelles sont les différentes personalisations de formulaire qui peuvent être faites dans Symfony ? 
+
+
+Theme a tout les formulaires 
+
+Fichier : twig.form_themes
+
+`twig:
+form_themes: ['bootstrap_4_horizontal_layout.html.twig']
+`
+Un seul formulaire 
+
+`{% form_theme form with [
+'foundation_5_layout.html.twig',
+'forms/my_custom_theme.html.twig'
+] %}`
+
+redefinition de block 
+
+`{% block integer_widget %}
+<div class="some-custom-class">
+{{ parent() }}
+</div>
+{% endblock %}`
+
+### Securité 
+
+####Encoder :
+ Cryptage des mots de passe 
+####Provider :
+Gestion de session 
+dans notre cas user provider gestion du rechragement des pages, remember me ,impersonation(plusieurs uitisateurs sauvegardé)
+####Firewall : 
+C'est le système d'authentification 
+####Access Control
+Gestion des permissions/Role
+####Role
+Ensemble de permissions regroupé sous un Role  
+####Voter
+
+FosUserBundle est un système d'User, symfony ne recommande plus sont utlisation , il est plus fexible de faire son propre système d'Utilisateurs
+
+#### Argon2i
+Argon2 est une fonction de dérivation de clé 
+elle est intégré a Php mais default B Crypt
+#### Bcrypt
+Autre fonction de hachage 
+par default php
+#### Plaintext
+text pas encrypté
+#### BasicHTTP
+en Http il existe une authentification basic sous la forme d'un entete de requete http mais il n'est pas encodé (sauf utilisation du https)
+
+#### Hachage 
+Une fonction de hachage permet de créer une signature des données qu'on lui passe en entrer, il est impossible de revenir au texte de base à partir de la signature 
+
+Carrote -> Hachage -> bout de carotte 
