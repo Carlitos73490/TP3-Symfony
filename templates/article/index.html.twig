@@ -3,13 +3,20 @@
 {% block title %}Hello ArticleController!{% endblock %}
 
 {% block body %}
+    <div class="bg-gray-800 w-full py-8">
     {{ post.content}}
+    </div>
 
-    {{ form(form) }}
+    <div>
+        {{ form(form) }}
+    </div>
 
-    {% for comment in post.comments %}
-        {{ comment.author}}
-        {{ comment.content}}
-    {% endfor %}
+    <div>
+        {% for comment in post.comments %}
+            {{ comment.author}}
+            {{ comment.content}}
+        {% endfor %}
+    </div>
+
 
 {% endblock %}

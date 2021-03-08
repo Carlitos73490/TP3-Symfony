@@ -68,3 +68,8 @@ forms symfony est un utilitaire puissant pour réaliser des formulaires html
 
 Pas besoin de créer le formulaire en html, symfony s'en charge ainsi que le mapping, la gestion de la validation ... c'est plus simple 
 
+### Bootstrap
+
+`composer require symfony/webpack-encore-bundle`
+
+`npm install -g yarn`
