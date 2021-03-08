@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Comment;
 use App\Entity\Post;
+use App\Form\CommentType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -28,15 +29,15 @@ class ArticleController extends AbstractController
         $post->addComment($comment);
 
 
-        $form = $this->createFormBuilder($comment)
-            ->add('content', TextType::class)
-            ->add('save', SubmitType::class, ['label' => 'Save Comment'])
-            ->getForm();
+//        $form = $this->createFormBuilder($comment)
+//            ->add('content', TextType::class)
+//            ->add('save', SubmitType::class, ['label' => 'Save Comment'])
+//            ->getForm();
 
         $comment = new Comment();
 
         //$form = $this->createForm(Comment::class, $comment);
-
+        $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
