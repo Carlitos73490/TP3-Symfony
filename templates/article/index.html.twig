@@ -4,6 +4,9 @@
 
 {% block body %}
     {{ post.content}}
+
+    {{ form(form) }}
+
     {% for comment in post.comments %}
         {{ comment.author}}
         {{ comment.content}}
