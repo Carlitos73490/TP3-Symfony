@@ -24,19 +24,17 @@ class ArticleController extends AbstractController
 
         $this->createFormBuilder();
 
-        $comment = new Comment();
-        $comment->setContent("");
-        $post->addComment($comment);
-
+        //$comment = new Comment();
+        //$comment->setContent("");
 
 //        $form = $this->createFormBuilder($comment)
 //            ->add('content', TextType::class)
 //            ->add('save', SubmitType::class, ['label' => 'Save Comment'])
 //            ->getForm();
+        //$form = $this->createForm(Comment::class, $comment);
+        //$comment = new Comment();
 
         $comment = new Comment();
-
-        //$form = $this->createForm(Comment::class, $comment);
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
 
@@ -51,7 +49,9 @@ class ArticleController extends AbstractController
             // for example, if Task is a Doctrine entity, save it!
             $entityManager = $this->getDoctrine()->getManager();
 
-            $entityManager->persist($comment);
+            $post->addComment($comment);
+            $entityManager->persist($post);
+            //$entityManager->persist($comment);
             $entityManager->flush();
 
         }

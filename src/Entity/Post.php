@@ -41,7 +41,7 @@ class Post
     private $isDeleted;
 
     /**
-     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="Post")
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="Post",cascade={"persist"})
      */
     private $comments;
 
