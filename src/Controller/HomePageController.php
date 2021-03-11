@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomePageController extends AbstractController
 {
-    #[Route('/homepage', name: 'home_page')]
+    #[Route('/', name: 'home_page')]
     public function index(): Response
     {
         $posts = $this->getDoctrine()
