@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class PostController extends AbstractController
 {
-    #[Route('/post', name: 'post')]
+    #[Route('/Post', name: 'post')]
     public function index(): Response
     {
         $posts = $this->getDoctrine()
