@@ -50,8 +50,12 @@ class Post
      */
     private User $author;
 
+
+
+
     public function __construct()
     {
+       $this->createdAt = new \DateTime();
         $this->comments = new ArrayCollection();
     }
 
@@ -155,5 +159,19 @@ class Post
     {
         return $this->author . " " . $this->id;
     }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+
 
 }

@@ -42,6 +42,17 @@ class Comment
      */
     private $isDeleted;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="comments")
+     */
+    private $user;
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime();
+    }
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -110,6 +121,30 @@ class Comment
     public function __toString(): string
     {
         return $this->getAuthor() . " " .$this->getAuthor();
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function getOneToMany(): ?User
+    {
+        return $this->OneToMany;
+    }
+
+    public function setOneToMany(?User $OneToMany): self
+    {
+        $this->OneToMany = $OneToMany;
+
+        return $this;
     }
 
 }
