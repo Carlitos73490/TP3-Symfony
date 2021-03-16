@@ -15,8 +15,10 @@ class HomePageController extends AbstractController
         $posts = $this->getDoctrine()
             ->getRepository(Post::class)
             ->findAll();
+        $user = $this->getUser();
+        $currentUserName = isset($user) ? $this->getUser()->getUsername() : "Anonyme";
         return $this->render('home_page/index.html.twig', [
-            'posts' => $posts,
+            'posts' => $posts, 'currentUserName' => $currentUserName ,
         ]);
     }
 }
