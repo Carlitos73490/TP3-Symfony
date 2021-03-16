@@ -1,11 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Article{% endblock %}
+{% block title %}{{post.title}}{% endblock %}
+
+{% block headerTitle %}{{ post.title}}{% endblock %}
 
 {% block body %}
-    <p class="p-3 border">
-    {{ post.content}}
-    </p>
+    <div>
+        <div class="d-flex justify-content-between">
+
+            {% if is_granted('edit',post) %}
+                <div>
+                    <a href="/article/edit/{{post.id}}">Edit</a>
+                </div>
+            {% endif %}
+        </div>
+
+        <p class="p-3 border">
+            {{ post.content}}
+        </p>
+    </div>
+
 
     {% if is_granted('ROLE_USER') %}
     <div>

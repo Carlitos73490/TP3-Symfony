@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Comment;
 use App\Entity\Post;
 use App\Form\CommentType;
+use App\Form\PostType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -77,10 +78,8 @@ class ArticleController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($comment);
             $entityManager->flush();
-
             return $this->redirect("/article/" . $comment->getPost()->getId());
         }
-
         return $this->render('comment/edit.html.twig', [
             'form' => $form->createView(),
         ]);
@@ -91,14 +90,51 @@ class ArticleController extends AbstractController
      * @ParamConverter("post", options={"id"="post_id"})
      * @ParamConverter("comment", options={"id"="comment_id"})
      */
-    public function deleteComment (Request $request, Comment $comment): Response {
+    public function deleteComment (Request $request, Comment $comment,Post $post): Response {
         $this->denyAccessUnlessGranted('edit', $comment);
-
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($comment);
             $entityManager->flush();
-
-            return $this->redirect("/article/" . $comment->getPost()->getId());
+            return $this->redirect("/article/" . $post->getId());
     }
+
+
+    /**
+     * @Route("/article/edit/{post_id}")
+     * @ParamConverter("post", options={"id"="post_id"})
+     */
+    public function edit(Request $request, Post $post): Response {
+        $this->denyAccessUnlessGranted('edit', $post);
+
+        $form = $this->createForm(PostType::class, $post);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $post = $form->getData();
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($post);
+            $entityManager->flush();
+            return $this->redirect("/article/" . $post->getId());
+        }
+
+        return $this->render('post/edit.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/article/delete/{post_id}")
+     * @ParamConverter("post", options={"id"="post_id"})
+     */
+    public function delete(Request $request, Post $post): Response {
+        $this->denyAccessUnlessGranted('edit', $post);
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($post);
+        $entityManager->flush();
+
+        return $this->redirect("/article/" . $post->getId());
+    }
+
 
 }

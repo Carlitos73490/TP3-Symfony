@@ -3,18 +3,31 @@
 {% block title %}Blog Carl{% endblock %}
 
 {% block body %}
-    <div class="d-flex w-100">
+    <div class="d-flex w-100 h-100">
         <div class="w-75">
-        <p>New Articles</p>
-        {% for post in posts %}
-            <div class="d-flex">
-                <a href="profile/{{ post.author.id}}">{{ post.author.username }}</a>
-                <a href="article/{{ post.id}}">{{ post.content }}</a>
+            <div class="d-flex justify-content-between align-items-center">
+                <h1 class="font-weight-bold">New Articles</h1>
+                {% if is_granted('ROLE_AUTHOR') %}
+                    <h1 class="font-weight-bold bg-secondary"><a href="/addPost">+</a></h1>
+                {% endif %}
             </div>
+        {% for post in posts %}
+            {% if is_granted('viewPost',post) %}
+            <div class="d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-end ">
+                    <h2 class="m-1"><a href="article/{{ post.id}}">{{ post.title }}</a></h2>
+                    <h5>De <a href="profile/{{ post.author.id}}">{{ post.author.username }}</a></h5>
+                </div>
+               {% if is_granted('editPost',post) %}
+                    <a class="p-3" href="deletePost/{{ post.id}}">Delete</a>
+               {% endif %}
+            </div>
+           {% endif %}
         {% endfor %}
+
         </div>
-        <div class="w-25">
-            <p class="font-weight-bold">Bonjour {{currentUserName}}</p>
+        <div class="w-25 border-primary border-left p-3">
+            <h3 class="font-weight-bold">Bonjour {{currentUserName}}</h3>
             <p>Top Articles</p>
         </div>
     </div>

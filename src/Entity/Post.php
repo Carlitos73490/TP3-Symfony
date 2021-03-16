@@ -50,6 +50,11 @@ class Post
      */
     private User $author;
 
+    /**
+     * @ORM\Column(type="string", length=255,nullable=true)
+     */
+    private ?string $Title;
+
 
 
 
@@ -157,7 +162,7 @@ class Post
 
     public function __toString(): string
     {
-        return $this->author . " " . $this->id;
+        return $this->author->getUsername() . " " . $this->id;
     }
 
     public function getUser(): ?User
@@ -168,6 +173,18 @@ class Post
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getTitle(): ?string
+    {
+        return $this->Title;
+    }
+
+    public function setTitle(?string $Title): self
+    {
+        $this->Title = $Title;
 
         return $this;
     }
