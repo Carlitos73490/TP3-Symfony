@@ -20,13 +20,23 @@
     {% endif %}
 
     <div class="d-flex flex-column p-3 border">
-        <p class="font-weight-bolder"> Last Comments</p>
+        <h1 class="font-weight-bolder">Last Comments</h1>
         {% for comment in post.comments %}
+           {% if is_granted('view',comment) %}
             <div class="d-flex flex-column">
-                <div class="font-weight-bold">{{ comment.author.username}} says :</div>
-                <div>{{ comment.content}}</div>
-            </div>
+                <div class="d-flex justify-content-between">
+                    <h5 class="font-weight-bold">{{ comment.author.username}} says :</h5>
+                    {% if is_granted('edit',comment) %}
+                        <div>
+                        <a href="/article/{{post.id}}/editComment/{{comment.id}}">Edit</a>
+                        <a href="/article/{{post.id}}/deleteComment/{{comment.id}}">Delete</a>
+                        </div>
+                    {% endif %}
+                </div>
+                <div>{{ comment.content}} </div>
 
+            </div>
+            {% endif %}
         {% endfor %}
     </div>
 

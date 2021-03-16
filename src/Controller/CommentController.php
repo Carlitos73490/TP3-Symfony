@@ -17,6 +17,7 @@ class CommentController extends AbstractController
             ->findAll();
 
 
+
         return $this->render('comment/index.html.twig', [
             'comments' => $comments,
         ]);

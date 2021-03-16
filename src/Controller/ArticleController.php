@@ -22,7 +22,7 @@ class ArticleController extends AbstractController
     public function index(Request $request, Post $post): Response
     {
 
-        $this->createFormBuilder();
+        //$this->createFormBuilder();
 
         //$comment = new Comment();
         //$comment->setContent("");
@@ -55,12 +55,50 @@ class ArticleController extends AbstractController
             $entityManager->persist($post);
             //$entityManager->persist($comment);
             $entityManager->flush();
-
         }
-
         return $this->render('article/index.html.twig', [
             'post' => $post, 'form' => $form->createView(),
         ]);
 
     }
+
+    /**
+     * @Route("/article/{post_id}/editComment/{comment_id}")
+     * @ParamConverter("post", options={"id"="post_id"})
+     * @ParamConverter("comment", options={"id"="comment_id"})
+     */
+    public function editComment (Request $request, Comment $comment): Response {
+      $this->denyAccessUnlessGranted('edit', $comment);
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $comment = $form->getData();
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($comment);
+            $entityManager->flush();
+
+            return $this->redirect("/article/" . $comment->getPost()->getId());
+        }
+
+        return $this->render('comment/edit.html.twig', [
+            'form' => $form->createView(),
+        ]);
+   }
+
+    /**
+     * @Route("/article/{post_id}/deleteComment/{comment_id}")
+     * @ParamConverter("post", options={"id"="post_id"})
+     * @ParamConverter("comment", options={"id"="comment_id"})
+     */
+    public function deleteComment (Request $request, Comment $comment): Response {
+        $this->denyAccessUnlessGranted('edit', $comment);
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($comment);
+            $entityManager->flush();
+
+            return $this->redirect("/article/" . $comment->getPost()->getId());
+    }
+
 }
