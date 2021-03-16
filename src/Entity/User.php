@@ -5,11 +5,13 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @UniqueEntity(fields={"username"}, message="There is already an account with this username")
  */
 class User implements UserInterface
 {
@@ -67,6 +69,16 @@ class User implements UserInterface
     private $posts;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $email;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $isBlocked;
+
+    /**
      * A visual identifier that represents this user.
      *
      * @see UserInterface
@@ -88,11 +100,11 @@ class User implements UserInterface
      */
     public function getRoles(): array
     {
-        $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
-
-        return array_unique($roles);
+//        $roles = $this->roles;
+//        // guarantee every user at least has ROLE_USER
+//        $roles[] = 'ROLE_USER';
+        return array_merge(["ROLE_USER"], $this->roles);
+        //return array_unique($roles);
     }
 
     public function setRoles(array $roles): self
@@ -228,6 +240,35 @@ class User implements UserInterface
                 $post->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(?string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function isVerified(): bool
+    {
+        return $this->isVerified;
+    }
+
+    public function getIsBlocked(): ?bool
+    {
+        return $this->isBlocked;
+    }
+
+    public function setIsBlocked(?bool $isBlocked): self
+    {
+        $this->isBlocked = $isBlocked;
 
         return $this;
     }

@@ -7,6 +7,7 @@
     {{ post.content}}
     </p>
 
+    {% if is_granted('ROLE_USER') %}
     <div>
         {% form_theme form 'bootstrap_4_layout.html.twig' %}
 
@@ -16,6 +17,7 @@
 {#            </div>#}
 {#        {% endblock %}#}
     </div>
+    {% endif %}
 
     <div class="d-flex flex-column p-3 border">
         <p>Last Comments</p>

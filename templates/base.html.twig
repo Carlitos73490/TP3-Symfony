@@ -15,8 +15,13 @@
     </head>
 
     <body class="d-flex flex-column">
-        <header class="bg-dark p-5">
+        <header class="bg-dark p-5 d-flex justify-content-between">
             <h1 class="text-primary">Blog Title</h1>
+            <div>
+                <button onclick="location.href='/login'" >Connexion</button>
+                <button onclick="location.href='/logout'">Déconnexion</button>
+                <button onclick="location.href='/register'">Inscription</button>
+            </div>
         </header>
         <div class="p-3">
             {% block body %}{% endblock %}

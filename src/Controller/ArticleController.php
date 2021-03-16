@@ -38,7 +38,9 @@ class ArticleController extends AbstractController
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
 
+
         if ($form->isSubmitted() && $form->isValid()) {
+            $this->denyAccessUnlessGranted('ROLE_USER');
             // $form->getData() holds the submitted values
             // but, the original `$task` variable has also been updated
             $comment = $form->getData();
