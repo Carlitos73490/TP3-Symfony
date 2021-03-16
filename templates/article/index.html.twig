@@ -20,10 +20,10 @@
     {% endif %}
 
     <div class="d-flex flex-column p-3 border">
-        <p>Last Comments</p>
+        <p class="font-weight-bolder"> Last Comments</p>
         {% for comment in post.comments %}
-            <div class="d-flex">
-                <div>{{ comment.author}}</div>
+            <div class="d-flex flex-column">
+                <div class="font-weight-bold">{{ comment.author.username}} says :</div>
                 <div>{{ comment.content}}</div>
             </div>
 

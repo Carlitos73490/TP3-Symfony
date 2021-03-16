@@ -45,7 +45,7 @@ class ArticleController extends AbstractController
             // but, the original `$task` variable has also been updated
             $comment = $form->getData();
 
-            //$comment->setCreatedAt(new \DateTimeImmutable());
+            $comment->setAuthor($this->getUser());
             $comment->setIsDeleted(false);
             // ... perform some action, such as saving the task to the database
             // for example, if Task is a Doctrine entity, save it!

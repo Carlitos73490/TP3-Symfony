@@ -59,7 +59,7 @@ class User implements UserInterface
     }
 
     /**
-     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="user")
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="author")
      */
     private $comments;
 
