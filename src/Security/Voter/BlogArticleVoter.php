@@ -23,10 +23,11 @@ class BlogArticleVoter extends Voter
     protected function voteOnAttribute($attribute, $subject, TokenInterface $token)
     {
         $user = $token->getUser();
-        // if the user is anonymous, do not grant access
-//        if (!$user instanceof UserInterface) {
-//            return $user = new User();
-//        }
+        // if the user is anonymous, Create a fake User
+        if (!$user instanceof UserInterface) {
+            $user = new User();
+           $user->getRoles();
+       }
 
         // you know $subject is a Post object, thanks to `supports()`
         /** @var Post $post */
@@ -35,30 +36,30 @@ class BlogArticleVoter extends Voter
         // ... (check conditions and return true to grant permission) ...
         switch ($attribute) {
             case self::EDIT:
-                return $this->canEdit($post);
+                return $this->canEdit($post,$user);
             case self::VIEW:
-                return $this->canView($post);
+                return $this->canView($post,$user);
         }
         throw new \LogicException('This code should not be reached!');
     }
 
-    private function canView(Post $post)
+    private function canView(Post $post,User $user)
     {
 
-//        if ($this->canEdit($post, $user)) {
-//            return false;
-//        } else {
+      if ($this->canEdit($post, $user)) {
+            return true;
+        } else {
             return $post->getIsPublished();
-        //}
+        }
     }
 
-    private function canEdit(Post $post)
+    private function canEdit(Post $post, User $user)
     {
-//        if(in_array('ROLE_ADMIN',$user->getRoles())){
-//            return true;
-//        } else {
-            return true;$user === $post->getAuthor();
-        //}
+        if(in_array('ROLE_ADMIN',$user->getRoles())){
+            return true;
+       } else {
+           return $user === $post->getAuthor();
+        }
         //return true;
 
 

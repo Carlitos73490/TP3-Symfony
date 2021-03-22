@@ -131,3 +131,47 @@ en Http il existe une authentification basic sous la forme d'un entete de requet
 Une fonction de hachage permet de créer une signature des données qu'on lui passe en entrer, il est impossible de revenir au texte de base à partir de la signature 
 
 Carrote -> Hachage -> bout de carotte 
+
+#### Schéma form authenticator
+
+A faire
+
+
+#### Services 
+
+Dans un symfony un service est chargé de remplir une fonction. quand on installe un bundle c'est un service.
+Beaucoup de services sont présent dans symfony on peut tous les listers avec la commande
+`php bin/console debug:autowiring`
+contairement a du code dans un controlleur en particulier le code dans un service peut être appelé partout.
+ Pour en citer quelques un qu'on a utilisé dans ce projet :
+
+-Router 
+-le service de rendu twig 
+-tout les services de sécurité 
+-Service EasyAdmin ....
+
+##### Dependency Injection
+
+Dans symfony l'Autowiring réalise l'injection des dépendances, par exemple on appele une variable $this->logger, l'autowiring de symfony va automatiquement comprendre qu'il faut injecter le service Logger. 
+
+##### Service 
+
+Une fonctionalité 
+
+##### AutoWiring 
+
+activer dans services.yaml 
+
+autowire: true
+
+Chargement du services lorsque celui ci est passé en paramètre dans un constructeur de controlleur à partir du nom de la classe (l'id)
+
+##### Container
+
+le container d'un service designe l'element utilisant ce service, par exemple un Controlleur
+
+##### Quelle importance a les services dans le fonctionnement de Symfony ? 
+
+C'est la base du fonctionnement de symfony , sans eux rien ne peut fonctionner.
+
+

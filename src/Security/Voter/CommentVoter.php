@@ -26,9 +26,10 @@ class CommentVoter extends Voter
     protected function voteOnAttribute($attribute, $subject, TokenInterface $token)
     {
         $user = $token->getUser();
-        // if the user is anonymous, do not grant access
+        // if the user is anonymous,create a fake User
         if (!$user instanceof UserInterface) {
-            return false;
+            $user = new User();
+            $user->getRoles();
         }
         // you know $subject is a Comment object, thanks to `supports()`
         /** @var Comment $comment */
