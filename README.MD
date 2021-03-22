@@ -175,3 +175,20 @@ le container d'un service designe l'element utilisant ce service, par exemple un
 C'est la base du fonctionnement de symfony , sans eux rien ne peut fonctionner.
 
 
+#### Validateurs
+
+`composer require symfony/validator doctrine/annotations`
+
+les validateurs servent à controller la saisie utilisateur
+
+Validations au niveau des formulaires 
+
+Créer un nouveau validateur 
+
+`symfony console make:validator`
+
+
+
+
+
+
