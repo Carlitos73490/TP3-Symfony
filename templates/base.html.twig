@@ -18,9 +18,14 @@
         <header class="bg-dark p-5 d-flex justify-content-between">
             <h1 class="text-primary">{% block headerTitle %}Bienvenue sur mon Blog{% endblock %}</h1>
             <div>
-                <button onclick="location.href='/login'" >Connexion</button>
+                {% if app.user %}
+                <h3> {{ app.user.username }}</h3>
                 <button onclick="location.href='/logout'">Déconnexion</button>
-                <button onclick="location.href='/register'">Inscription</button>
+
+                {% else %}
+                    <button onclick="location.href='/login'" >Connexion</button>
+                    <button onclick="location.href='/register'">Inscription</button>
+                {% endif %}
             </div>
         </header>
         <div class="p-3 d-flex flex-column">
